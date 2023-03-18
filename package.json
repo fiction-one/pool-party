@@ -1,5 +1,5 @@
 {
-  "name": "dapp",
+  "name": "f1",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
@@ -18,7 +18,7 @@
     "turbo": "latest"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.8.0"
   },
   "dependencies": {},
   "packageManager": "pnpm@7.28.0"

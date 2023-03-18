@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google";
-import { Button } from "@f1/ui/src";
+import { Button } from "@f1/ui-core";
 
 const inter = Inter({ subsets: ["latin"] });
 
