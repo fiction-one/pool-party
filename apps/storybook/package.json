@@ -10,12 +10,12 @@
   },
   "dependencies": {
     "@f1/ui-core": "workspace:*",
+    "@f1/ui-layers": "workspace:*",
+    "@f1/ui-theme": "workspace:*",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^7.0.0-rc.4",
-    "@storybook/addon-docs": "^7.0.0-rc.4",
     "@storybook/addon-essentials": "^7.0.0-rc.4",
     "@storybook/addon-links": "^7.0.0-rc.4",
     "@storybook/builder-vite": "^7.0.0-rc.4",

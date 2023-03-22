@@ -1,5 +1,5 @@
 {
-  "name": "@f1/ui-core",
+  "name": "@f1/ui-theme",
   "version": "0.0.0",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -16,8 +16,6 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@f1/ui-utils": "workspace:*",
-    "@f1/ui-theme": "workspace:*",
     "@types/react": "^18.0.17",
     "@types/styled-components": "^5.1.26",
     "eslint": "^7.32.0",

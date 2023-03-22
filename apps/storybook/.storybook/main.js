@@ -14,6 +14,17 @@ module.exports = {
             find: "@f1/ui-core",
             replacement: path.resolve(__dirname, "../../../packages/ui-core/"),
           },
+          {
+            find: "@f1/ui-layers",
+            replacement: path.resolve(
+              __dirname,
+              "../../../packages/ui-layers/"
+            ),
+          },
+          {
+            find: "@f1/ui-theme",
+            replacement: path.resolve(__dirname, "../../../packages/ui-theme/"),
+          },
         ],
       },
     });

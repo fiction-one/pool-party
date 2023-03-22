@@ -1,5 +1,5 @@
 {
-  "name": "@f1/client",
+  "name": "@f1/castify",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -9,20 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@f1/ui-core": "workspace:*",
-    "@f1/ui-layers": "workspace:*",
-    "@f1/ui-theme": "workspace:*",
     "next": "^13.2.3",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "styled-components": "^5.3.9"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@types/node": "^17.0.12",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
-    "@types/styled-components": "^5.1.26",
     "eslint": "7.32.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
