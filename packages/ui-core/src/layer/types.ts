@@ -1,5 +1,5 @@
 import React from "react";
-import { LayerVariant } from "@f1/ui-theme/src/themes/types";
+import { LayerVariant } from "@f1/ui-theme";
 
 export interface LayerProps {
   variant: LayerVariant;

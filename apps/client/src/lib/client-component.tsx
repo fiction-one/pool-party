@@ -4,7 +4,7 @@ import React from "react";
 import { Layer, InputControl, TextInput, Typography } from "@f1/ui-core";
 import { DataTable, TableProps } from "@f1/ui-data-table";
 import { pxToRem } from "@f1/ui-utils";
-import { Frame, Section } from "./layout";
+import { Frame, Section } from "./layout-components";
 
 const columns: TableProps<Record<string, unknown>>["columns"] = [
   {

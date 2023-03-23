@@ -1,8 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
 import { FloatingPortal, useMergeRefs } from "@floating-ui/react";
-import { Layer } from "@f1/ui-core/src";
-import { pxToRem } from "@f1/ui-utils/src";
+import { Layer } from "@f1/ui-core";
+import { pxToRem } from "@f1/ui-utils";
 import { useLayer } from "./floating-provider";
 
 export const Trigger = React.forwardRef<

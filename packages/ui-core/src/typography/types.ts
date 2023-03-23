@@ -1,5 +1,5 @@
 import React from "react";
-import { TextVariant } from "@f1/ui-theme/src/themes/types";
+import { TextVariant } from "@f1/ui-theme";
 
 export interface TypographyProps {
   as?: "span" | "p" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";

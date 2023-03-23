@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css, DefaultTheme } from "styled-components";
 import { pxToRem } from "@f1/ui-utils";
-import { InputVariant } from "@f1/ui-theme/src/themes/types";
+import { InputVariant } from "@f1/ui-theme";
 import { TextInputProps } from "./types";
 
 export const StyledTextInput = styled.input<TextInputProps>`

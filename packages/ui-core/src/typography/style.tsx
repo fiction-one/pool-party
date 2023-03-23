@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css, DefaultTheme } from "styled-components";
 import { pxToRem } from "@f1/ui-utils";
-import { TextVariant } from "@f1/ui-theme/src/themes/types";
+import { TextVariant } from "@f1/ui-theme";
 import { TypographyProps } from "./types";
 
 const getLineHeight = (size: TypographyProps["lineHeight"]) => {

@@ -17,7 +17,8 @@ export default function StyledComponentsRegistry({
 
   useServerInsertedHTML(() => {
     const styles = styledComponentsStyleSheet.getStyleElement();
-    styledComponentsStyleSheet.seal();
+    // @ts-ignore ignored until styled-components types updated
+    styledComponentsStyleSheet.instance.clearTag();
     return styles;
   });
 

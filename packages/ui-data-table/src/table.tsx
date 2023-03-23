@@ -8,7 +8,7 @@ import {
   TableHeaderCell,
   TableHeaderRow,
   TableRow,
-} from "@f1/ui-core/src";
+} from "@f1/ui-core";
 import { TableProps } from "./types";
 
 export const DataTable = <T extends Record<string, unknown>>(

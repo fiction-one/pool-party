@@ -125,9 +125,10 @@ importers:
       tsconfig: workspace:*
       tsup: ^6.6.3
       typescript: ^4.9.5
-    devDependencies:
+    dependencies:
       '@f1/ui-theme': link:../ui-theme
       '@f1/ui-utils': link:../ui-utils
+    devDependencies:
       '@types/react': 18.0.28
       '@types/styled-components': 5.1.26
       eslint: 7.32.0
@@ -152,15 +153,16 @@ importers:
       tsconfig: workspace:*
       tsup: ^6.6.3
       typescript: ^4.9.5
-    devDependencies:
+    dependencies:
       '@f1/ui-core': link:../ui-core
+      react-table: 7.8.0_react@18.2.0
+    devDependencies:
       '@types/react': 18.0.28
       '@types/react-table': 7.7.14
       eslint: 7.32.0
       eslint-config-custom: link:../eslint-config-custom
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      react-table: 7.8.0_react@18.2.0
       styled-components: 5.3.9_zqyshjqmmmqwn6ax6dftxsbcrq
       tsconfig: link:../tsconfig
       tsup: 6.6.3_typescript@4.9.5
@@ -182,11 +184,12 @@ importers:
       tsconfig: workspace:*
       tsup: ^6.6.3
       typescript: ^4.9.5
-    devDependencies:
+    dependencies:
       '@f1/ui-core': link:../ui-core
       '@f1/ui-theme': link:../ui-theme
       '@f1/ui-utils': link:../ui-utils
       '@floating-ui/react': 0.21.1_biqbaboplfbrettd7655fr4n2y
+    devDependencies:
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
       '@types/styled-components': 5.1.26
@@ -1985,13 +1988,13 @@ packages:
 
   /@floating-ui/core/1.2.4:
     resolution: {integrity: sha512-SQOeVbMwb1di+mVWWJLpsUTToKfqVNioXys011beCAhyOIFtS+GQoW4EQSneuxzmQKddExDwQ+X0hLl4lJJaSQ==}
-    dev: true
+    dev: false
 
   /@floating-ui/dom/1.2.4:
     resolution: {integrity: sha512-4+k+BLhtWj+peCU60gp0+rHeR8+Ohqx6kjJf/lHMnJ8JD5Qj6jytcq1+SZzRwD7rvHKRhR7TDiWWddrNrfwQLg==}
     dependencies:
       '@floating-ui/core': 1.2.4
-    dev: true
+    dev: false
 
   /@floating-ui/react-dom/1.3.0_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-htwHm67Ji5E/pROEAr7f8IKFShuiCKHwUC/UY4vC3I5jiSvGFAYnSYiZO5MlGmads+QqvUkR9ANHEguGrDv72g==}
@@ -2002,7 +2005,7 @@ packages:
       '@floating-ui/dom': 1.2.4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-    dev: true
+    dev: false
 
   /@floating-ui/react/0.21.1_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-ojjsU/rvWEyNDproy1yQW5EDXJnDip8DXpSRh+hogPgZWEp0Y/2UBPxL3yoa53BDYsL+dqJY0osl9r0Jes3eeg==}
@@ -2015,7 +2018,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       tabbable: 6.1.1
-    dev: true
+    dev: false
 
   /@humanwhocodes/config-array/0.5.0:
     resolution: {integrity: sha512-FagtKFz74XrTl7y6HCzQpwDfXP0yhxe9lHLD1UZxjvZIcbyRz8zTFF/yYNfSfzU414eDwZ1SrO0Qvtyf+wFMQg==}
@@ -3661,7 +3664,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       tslib: 2.5.0
-    dev: true
+    dev: false
 
   /aria-query/5.1.3:
     resolution: {integrity: sha512-R5iJ5lkuHybztUfuOAznmboyjWq8O6sqNqtK7CLOqdydi54VNbORp49mb14KbWgG1QD3JFO9hJdZ+y4KutfdOQ==}
@@ -7244,7 +7247,7 @@ packages:
       react: ^16.8.3 || ^17.0.0-0 || ^18.0.0
     dependencies:
       react: 18.2.0
-    dev: true
+    dev: false
 
   /react/18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
@@ -7945,7 +7948,7 @@ packages:
 
   /tabbable/6.1.1:
     resolution: {integrity: sha512-4kl5w+nCB44EVRdO0g/UGoOp3vlwgycUVtkk/7DPyeLZUCuNFFKCFG6/t/DgHLrUPHjrZg6s5tNm+56Q2B0xyg==}
-    dev: true
+    dev: false
 
   /table/6.8.1:
     resolution: {integrity: sha512-Y4X9zqrCftUhMeH2EptSSERdVKt/nEdijTOacGD/97EKjhQ/Qs8RTlEGABSJNNN8lac9kheH+af7yAkEWlgneA==}

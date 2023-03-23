@@ -10,20 +10,22 @@
     "dist/**"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs --dts --external react,react-table,styled-components",
-    "dev": "tsup src/index.ts --format esm,cjs --watch --dts --external react,react-table,styled-components",
+    "build": "tsup src/index.ts --format esm,cjs --dts --external react,react-table",
+    "dev": "tsup src/index.ts --format esm,cjs --watch --dts --external react,react-table",
     "lint": "eslint \"src/**/*.ts*\"",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
-  "devDependencies": {
+  "dependencies": {
     "@f1/ui-core": "workspace:*",
+    "react-table": "^7.8.0"
+  },
+  "devDependencies": {
     "@types/react": "^18.0.17",
     "@types/react-table": "^7.7.14",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-table": "^7.8.0",
     "styled-components": "^5.3.9",
     "tsconfig": "workspace:*",
     "tsup": "^6.6.3",
