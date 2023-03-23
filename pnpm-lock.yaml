@@ -61,7 +61,6 @@ importers:
       '@storybook/addon-essentials': ^7.0.0-rc.4
       '@storybook/addon-links': ^7.0.0-rc.4
       '@storybook/builder-vite': ^7.0.0-rc.4
-      '@storybook/react': ^7.0.0-rc.4
       '@storybook/react-vite': ^7.0.0-rc.4
       eslint-config-custom: workspace:*
       react: 18.2.0
@@ -71,7 +70,6 @@ importers:
       styled-components: ^5.3.9
       tsconfig: workspace:*
       typescript: ^4.9.3
-      vite: ^4.1.4
     dependencies:
       '@f1/ui-core': link:../../packages/ui-core
       '@f1/ui-layers': link:../../packages/ui-layers
@@ -83,14 +81,12 @@ importers:
       '@storybook/addon-essentials': 7.0.0-rc.4_biqbaboplfbrettd7655fr4n2y
       '@storybook/addon-links': 7.0.0-rc.4_biqbaboplfbrettd7655fr4n2y
       '@storybook/builder-vite': 7.0.0-rc.4_vwvfc4ezh6jlf6pa67auy3eulu
-      '@storybook/react': 7.0.0-rc.4_ygqkwb4gg3aean7xjfdauovyqq
       '@storybook/react-vite': 7.0.0-rc.4_ndsstb2ob2rgr4m75wxvpqsrpi
       eslint-config-custom: link:../../packages/eslint-config-custom
       serve: 14.2.0
       storybook: 7.0.0-rc.4
       tsconfig: link:../../packages/tsconfig
       typescript: 4.9.5
-      vite: 4.1.4
 
   packages/eslint-config-custom:
     specifiers:
@@ -121,20 +117,20 @@ importers:
       eslint: ^7.32.0
       eslint-config-custom: workspace:*
       react: 18.2.0
-      styled-components: ^5.3.9
+      styled-components: '>= 5'
       tsconfig: workspace:*
       tsup: ^6.6.3
       typescript: ^4.9.5
     dependencies:
       '@f1/ui-theme': link:../ui-theme
       '@f1/ui-utils': link:../ui-utils
+      styled-components: 5.3.9_zqyshjqmmmqwn6ax6dftxsbcrq
     devDependencies:
       '@types/react': 18.0.28
       '@types/styled-components': 5.1.26
       eslint: 7.32.0
       eslint-config-custom: link:../eslint-config-custom
       react: 18.2.0
-      styled-components: 5.3.9_zqyshjqmmmqwn6ax6dftxsbcrq
       tsconfig: link:../tsconfig
       tsup: 6.6.3_typescript@4.9.5
       typescript: 4.9.5
@@ -146,24 +142,22 @@ importers:
       '@types/react-table': ^7.7.14
       eslint: ^7.32.0
       eslint-config-custom: workspace:*
-      react: 18.2.0
-      react-dom: 18.2.0
+      react: '>= 18'
       react-table: ^7.8.0
-      styled-components: ^5.3.9
+      styled-components: '>= 5'
       tsconfig: workspace:*
       tsup: ^6.6.3
       typescript: ^4.9.5
     dependencies:
       '@f1/ui-core': link:../ui-core
+      react: 18.2.0
       react-table: 7.8.0_react@18.2.0
+      styled-components: 5.3.9_zqyshjqmmmqwn6ax6dftxsbcrq
     devDependencies:
       '@types/react': 18.0.28
       '@types/react-table': 7.7.14
       eslint: 7.32.0
       eslint-config-custom: link:../eslint-config-custom
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      styled-components: 5.3.9_zqyshjqmmmqwn6ax6dftxsbcrq
       tsconfig: link:../tsconfig
       tsup: 6.6.3_typescript@4.9.5
       typescript: 4.9.5
@@ -179,8 +173,8 @@ importers:
       '@types/styled-components': ^5.1.26
       eslint: ^7.32.0
       eslint-config-custom: workspace:*
-      react: 18.2.0
-      styled-components: ^5.3.9
+      react: '>= 18'
+      styled-components: '>= 5'
       tsconfig: workspace:*
       tsup: ^6.6.3
       typescript: ^4.9.5
@@ -189,14 +183,14 @@ importers:
       '@f1/ui-theme': link:../ui-theme
       '@f1/ui-utils': link:../ui-utils
       '@floating-ui/react': 0.21.1_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      styled-components: 5.3.9_zqyshjqmmmqwn6ax6dftxsbcrq
     devDependencies:
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
       '@types/styled-components': 5.1.26
       eslint: 7.32.0
       eslint-config-custom: link:../eslint-config-custom
-      react: 18.2.0
-      styled-components: 5.3.9_zqyshjqmmmqwn6ax6dftxsbcrq
       tsconfig: link:../tsconfig
       tsup: 6.6.3_typescript@4.9.5
       typescript: 4.9.5
@@ -207,18 +201,19 @@ importers:
       '@types/styled-components': ^5.1.26
       eslint: ^7.32.0
       eslint-config-custom: workspace:*
-      react: 18.2.0
-      styled-components: ^5.3.9
+      react: '>= 18'
+      styled-components: '>= 5'
       tsconfig: workspace:*
       tsup: ^6.6.3
       typescript: ^4.9.5
+    dependencies:
+      react: 18.2.0
+      styled-components: 5.3.9_zqyshjqmmmqwn6ax6dftxsbcrq
     devDependencies:
       '@types/react': 18.0.28
       '@types/styled-components': 5.1.26
       eslint: 7.32.0
       eslint-config-custom: link:../eslint-config-custom
-      react: 18.2.0
-      styled-components: 5.3.9_zqyshjqmmmqwn6ax6dftxsbcrq
       tsconfig: link:../tsconfig
       tsup: 6.6.3_typescript@4.9.5
       typescript: 4.9.5
@@ -1519,6 +1514,7 @@ packages:
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
+    dev: false
 
   /@babel/types/7.21.2:
     resolution: {integrity: sha512-3wRZSs7jiFaB8AjxiiD+VqN5DTG2iRvJGQ+qYFrs/654lg6kGTQWIOFjlBo5RaXuAZjBmP3+OQH4dmhqiiyYxw==}
@@ -1552,15 +1548,19 @@ packages:
     resolution: {integrity: sha512-3aDpDprjM0AwaxGE09bOPkNxHpBd+kA6jty3RnaEXdweX1DF1U3VQpPYb0g1IStAuK7SVQ1cy+bNBBKp4W3Fjg==}
     dependencies:
       '@emotion/memoize': 0.8.0
+    dev: false
 
   /@emotion/memoize/0.8.0:
     resolution: {integrity: sha512-G/YwXTkv7Den9mXDO7AhLWkE3q+I92B+VqAE+dYG4NGPaHZGvt3G8Q0p9vmE+sq7rTGphUbAvmQ9YpbfMQGGlA==}
+    dev: false
 
   /@emotion/stylis/0.8.5:
     resolution: {integrity: sha512-h6KtPihKFn3T9fuIrwvXXUOwlx3rfUvfZIcP5a6rh8Y7zjE3O06hT5Ss4S/YI1AYhuZ1kjaE/5EaOOI2NqSylQ==}
+    dev: false
 
   /@emotion/unitless/0.7.5:
     resolution: {integrity: sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==}
+    dev: false
 
   /@emotion/use-insertion-effect-with-fallbacks/1.0.0_react@18.2.0:
     resolution: {integrity: sha512-1eEgUGmkaljiBnRMTdksDV1W4kUnmwgp7X9G8B++9GYwl1lUdqSndSriIrTJ0N7LQaoauY9JJ2yhiOYK5+NI4A==}
@@ -3844,9 +3844,11 @@ packages:
       lodash: 4.17.21
       picomatch: 2.3.1
       styled-components: 5.3.9_zqyshjqmmmqwn6ax6dftxsbcrq
+    dev: false
 
   /babel-plugin-syntax-jsx/6.18.0:
     resolution: {integrity: sha512-qrPaCSo9c8RHNRHIotaufGbuOBN8rtdC4QrrFFc43vyWCCz7Kl7GL1PGaXtMGQZUXrkCjNEgxDfmAuAabr/rlw==}
+    dev: false
 
   /balanced-match/1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -4065,6 +4067,7 @@ packages:
 
   /camelize/1.0.1:
     resolution: {integrity: sha512-dU+Tx2fsypxTgtLoE36npi3UqcjSSMNYfkqgmoEhtZrraP5VWq0K7FkWVTYa8eMPtnU/G2txVsfdCJTn9uzpuQ==}
+    dev: false
 
   /caniuse-lite/1.0.30001460:
     resolution: {integrity: sha512-Bud7abqjvEjipUkpLs4D7gR0l8hBYBHoa+tGtKJHvT2AYzLp1z7EmVkUT4ERpVUfca8S2HGIVs883D8pUH1ZzQ==}
@@ -4328,6 +4331,7 @@ packages:
   /css-color-keywords/1.0.0:
     resolution: {integrity: sha512-FyyrDHZKEjXDpNJYvVsV960FiqQyXc/LlYmsxl2BcdMb2WPx0OGRVgTg55rPSyLSNMqP52R9r8geSp7apN3Ofg==}
     engines: {node: '>=4'}
+    dev: false
 
   /css-to-react-native/3.2.0:
     resolution: {integrity: sha512-e8RKaLXMOFii+02mOlqwjbD00KSEKqblnpO9e++1aXS1fPQOpS1YoqdVHBqPjHNoxeF2mimzVqawm2KCbEdtHQ==}
@@ -4335,6 +4339,7 @@ packages:
       camelize: 1.0.1
       css-color-keywords: 1.0.0
       postcss-value-parser: 4.2.0
+    dev: false
 
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
@@ -4388,6 +4393,7 @@ packages:
     dependencies:
       ms: 2.1.2
       supports-color: 5.5.0
+    dev: false
 
   /deep-equal/2.2.0:
     resolution: {integrity: sha512-RdpzE0Hv4lhowpIUKKMJfeH6C1pXdtT1/it80ubgWqwI3qpuxUBpC1S4hnHg+zjnuOoDkzUtUCEEkG+XG5l3Mw==}
@@ -6990,6 +6996,7 @@ packages:
 
   /postcss-value-parser/4.2.0:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
+    dev: false
 
   /postcss/8.4.14:
     resolution: {integrity: sha512-E398TUmfAYFPBSdzgeieK2Y1+1cpdxJx8yXbK/m57nRhKSmk1GB2tO4lbLBtlkfPQTDKfe4Xqv1ASWPpayPEig==}
@@ -7630,6 +7637,7 @@ packages:
 
   /shallowequal/1.1.0:
     resolution: {integrity: sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==}
+    dev: false
 
   /shebang-command/2.0.0:
     resolution: {integrity: sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==}
@@ -7887,6 +7895,7 @@ packages:
       react-is: 18.1.0
       shallowequal: 1.1.0
       supports-color: 5.5.0
+    dev: false
 
   /styled-jsx/5.1.1_q2tyk3gci27qk4qoatek53e4vi:
     resolution: {integrity: sha512-pW7uC1l4mBZ8ugbiZrcIsiIvVx1UmTfw7UkC3Um2tmfUq9Bhk8IiyEIPl6F8agHgjzku6j0xQEZbfA5uSgSaCw==}
