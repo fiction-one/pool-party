@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@f1/ui-core": "workspace:*",
+    "@f1/ui-data-table": "workspace:*",
     "@f1/ui-layers": "workspace:*",
     "@f1/ui-theme": "workspace:*",
     "@f1/ui-utils": "workspace:*",

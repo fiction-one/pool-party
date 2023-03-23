@@ -2,8 +2,42 @@
 
 import React from "react";
 import { Layer, InputControl, TextInput, Typography } from "@f1/ui-core";
+import { DataTable, TableProps } from "@f1/ui-data-table";
 import { pxToRem } from "@f1/ui-utils";
 import { Frame, Section } from "./layout";
+
+const columns: TableProps<Record<string, unknown>>["columns"] = [
+  {
+    Header: "FNAME",
+    accessor: "fname",
+  },
+  {
+    Header: "STATUS",
+    accessor: "status",
+  },
+  {
+    Header: "REGISTRANT",
+    accessor: "registrant",
+  },
+  {
+    Header: "EXPIRES IN",
+    accessor: "expiresIn",
+  },
+  {
+    Header: "REGISTERED DATE",
+    accessor: "registeredDate",
+  },
+];
+
+const data = [
+  {
+    fname: "fname",
+    status: "status",
+    registrant: "registrant",
+    expiresIn: "expires in",
+    registeredDate: "registered date",
+  },
+];
 
 export default function ClientComponent() {
   const [search, setSearch] = React.useState("");
@@ -40,7 +74,9 @@ export default function ClientComponent() {
             />
           </InputControl>
         </Section>
-        <Section>Table</Section>
+        <Section>
+          <DataTable columns={columns} data={data} />
+        </Section>
       </Frame>
     </Layer>
   );

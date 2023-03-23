@@ -123,13 +123,13 @@ export const darkTheme: Theme = {
     surface: {
       default: {
         "background-color": palette.dark800,
-        "border-color": palette.dark800,
+        "border-color": palette.dark200,
       },
     },
     highlight: {
       default: {
         "background-color": palette.dark700,
-        "border-color": palette.dark700,
+        "border-color": palette.dark200,
       },
     },
     floating: {

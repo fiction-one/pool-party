@@ -16,6 +16,7 @@ importers:
     specifiers:
       '@babel/core': ^7.0.0
       '@f1/ui-core': workspace:*
+      '@f1/ui-data-table': workspace:*
       '@f1/ui-layers': workspace:*
       '@f1/ui-theme': workspace:*
       '@f1/ui-utils': workspace:*
@@ -33,6 +34,7 @@ importers:
       typescript: ^4.9.5
     dependencies:
       '@f1/ui-core': link:../../packages/ui-core
+      '@f1/ui-data-table': link:../../packages/ui-data-table
       '@f1/ui-layers': link:../../packages/ui-layers
       '@f1/ui-theme': link:../../packages/ui-theme
       '@f1/ui-utils': link:../../packages/ui-utils
@@ -66,6 +68,7 @@ importers:
       react-dom: 18.2.0
       serve: ^14.2.0
       storybook: ^7.0.0-rc.4
+      styled-components: ^5.3.9
       tsconfig: workspace:*
       typescript: ^4.9.3
       vite: ^4.1.4
@@ -75,6 +78,7 @@ importers:
       '@f1/ui-theme': link:../../packages/ui-theme
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      styled-components: 5.3.9_zqyshjqmmmqwn6ax6dftxsbcrq
     devDependencies:
       '@storybook/addon-essentials': 7.0.0-rc.4_biqbaboplfbrettd7655fr4n2y
       '@storybook/addon-links': 7.0.0-rc.4_biqbaboplfbrettd7655fr4n2y
@@ -129,6 +133,34 @@ importers:
       eslint: 7.32.0
       eslint-config-custom: link:../eslint-config-custom
       react: 18.2.0
+      styled-components: 5.3.9_zqyshjqmmmqwn6ax6dftxsbcrq
+      tsconfig: link:../tsconfig
+      tsup: 6.6.3_typescript@4.9.5
+      typescript: 4.9.5
+
+  packages/ui-data-table:
+    specifiers:
+      '@f1/ui-core': workspace:*
+      '@types/react': ^18.0.17
+      '@types/react-table': ^7.7.14
+      eslint: ^7.32.0
+      eslint-config-custom: workspace:*
+      react: 18.2.0
+      react-dom: 18.2.0
+      react-table: ^7.8.0
+      styled-components: ^5.3.9
+      tsconfig: workspace:*
+      tsup: ^6.6.3
+      typescript: ^4.9.5
+    devDependencies:
+      '@f1/ui-core': link:../ui-core
+      '@types/react': 18.0.28
+      '@types/react-table': 7.7.14
+      eslint: 7.32.0
+      eslint-config-custom: link:../eslint-config-custom
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-table: 7.8.0_react@18.2.0
       styled-components: 5.3.9_zqyshjqmmmqwn6ax6dftxsbcrq
       tsconfig: link:../tsconfig
       tsup: 6.6.3_typescript@4.9.5
@@ -3317,6 +3349,12 @@ packages:
 
   /@types/react-dom/18.0.11:
     resolution: {integrity: sha512-O38bPbI2CWtgw/OoQoY+BRelw7uysmXbWvw3nLWO21H1HSh+GOlqPuXshJfjmpNlKiiSDG9cc1JZAaMmVdcTlw==}
+    dependencies:
+      '@types/react': 18.0.28
+    dev: true
+
+  /@types/react-table/7.7.14:
+    resolution: {integrity: sha512-TYrv7onCiakaG1uAu/UpQ9FojNEt/4/ht87EgJQaEGFoWV606ZLWUZAcUHzMxgc3v1mywP1cDyz3qB4ho3hWOw==}
     dependencies:
       '@types/react': 18.0.28
     dev: true
@@ -7198,6 +7236,14 @@ packages:
   /react-refresh/0.14.0:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
+    dev: true
+
+  /react-table/7.8.0_react@18.2.0:
+    resolution: {integrity: sha512-hNaz4ygkZO4bESeFfnfOft73iBUj8K5oKi1EcSHPAibEydfsX2MyU6Z8KCr3mv3C9Kqqh71U+DhZkFvibbnPbA==}
+    peerDependencies:
+      react: ^16.8.3 || ^17.0.0-0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
     dev: true
 
   /react/18.2.0:

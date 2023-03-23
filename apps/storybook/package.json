@@ -13,7 +13,8 @@
     "@f1/ui-layers": "workspace:*",
     "@f1/ui-theme": "workspace:*",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "styled-components": "^5.3.9"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.0-rc.4",
