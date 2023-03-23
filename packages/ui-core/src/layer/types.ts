@@ -13,4 +13,5 @@ export interface LayerProps {
     | "nav"
     | "main";
   children: React.ReactNode;
+  style?: Pick<React.CSSProperties, "width" | "height">;
 }

@@ -18,7 +18,7 @@ export default function StyledComponentsRegistry({
   useServerInsertedHTML(() => {
     const styles = styledComponentsStyleSheet.getStyleElement();
     styledComponentsStyleSheet.seal();
-    return <>{styles}</>;
+    return styles;
   });
 
   if (typeof window !== "undefined") return <>{children}</>;

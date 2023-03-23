@@ -1,9 +1,10 @@
 import React from "react";
-import StyledComponentsRegistry from "../lib/registry";
-import Providers from "./providers";
+import StyledComponentsRegistry from "../lib/styled-components-registry";
+import ClientProviders from "../lib/client-providers";
+import { GlobalStyle } from "../lib/global-style";
 
 export const metadata = {
-  title: "Fiction One",
+  title: "🌎",
   description: "",
 };
 
@@ -14,9 +15,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body suppressHydrationWarning>
         <StyledComponentsRegistry>
-          <Providers>{children}</Providers>
+          <ClientProviders>
+            <GlobalStyle />
+            {children}
+          </ClientProviders>
         </StyledComponentsRegistry>
       </body>
     </html>
