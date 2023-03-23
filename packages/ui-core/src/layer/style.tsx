@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css, DefaultTheme } from "styled-components";
 import { LayerProps } from "./types";
-import { LayerVariant } from "@f1/ui-theme/src/themes/types";
+import { LayerVariant } from "@f1/ui-theme";
 
 const getThemeable = (theme: DefaultTheme, variant: LayerVariant) => {
   const layerTheme = theme.layer[variant];

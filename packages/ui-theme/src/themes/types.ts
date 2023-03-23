@@ -1,8 +1,15 @@
 export type ButtonVariant = "primary" | "secondary" | "ghost";
 
-export type LayerVariant = "navigation" | "page" | "card" | "floating";
+export type InputVariant = "primary";
 
-export type TextVariant = "primary" | "secondary" | "disabled";
+export type LayerVariant =
+  | "navigation"
+  | "page"
+  | "surface"
+  | "highlight"
+  | "floating";
+
+export type TextVariant = "primary" | "secondary" | "caption";
 
 type ThemeableCssProperty = "color" | "background-color" | "border-color";
 
@@ -16,6 +23,11 @@ export interface Theme {
   button: ThemeItem<
     ButtonVariant,
     "default" | "hover" | "active" | "disabled",
+    "color" | "background-color" | "border-color"
+  >;
+  input: ThemeItem<
+    InputVariant,
+    "default" | "active",
     "color" | "background-color" | "border-color"
   >;
   layer: ThemeItem<

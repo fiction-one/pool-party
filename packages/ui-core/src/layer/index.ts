@@ -1,1 +1,2 @@
-export * from "./layer";
+export * from "./component";
+export type { LayerProps } from "./types";

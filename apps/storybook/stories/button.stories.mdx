@@ -1,6 +1,6 @@
-import { Button } from "@f1/ui-core/src";
-import { ThemeProvider } from "@f1/ui-theme/src";
-import { Tooltip } from "@f1/ui-layers/src";
+import { Button } from "@f1/ui-core";
+import { ThemeProvider, darkTheme } from "@f1/ui-theme";
+import { Tooltip } from "@f1/ui-layers";
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 
 <Meta title="Components/Button" component={Button} />
@@ -17,7 +17,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl ege
 
 <Canvas>
     <Story name="Default">
-      <ThemeProvider theme="dark">
+      <ThemeProvider theme={darkTheme}>
           <Button size="small">Primary small</Button>
           <Button size="regular">Primary regular</Button>
           <Button size="large">Primary large</Button>

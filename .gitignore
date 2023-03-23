@@ -39,3 +39,9 @@ yarn-error.log*
 
 # vs code
 .vscode
+
+# jetbrains
+.idea
+
+# storybook
+storybook-static

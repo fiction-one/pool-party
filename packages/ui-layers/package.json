@@ -15,11 +15,13 @@
     "lint": "eslint \"src/**/*.ts*\"",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
-  "devDependencies": {
+  "dependencies": {
     "@f1/ui-core": "workspace:*",
     "@f1/ui-theme": "workspace:*",
     "@f1/ui-utils": "workspace:*",
-    "@floating-ui/react": "^0.21.1",
+    "@floating-ui/react": "^0.21.1"
+  },
+  "devDependencies": {
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/styled-components": "^5.1.26",
@@ -30,5 +32,9 @@
     "tsconfig": "workspace:*",
     "tsup": "^6.6.3",
     "typescript": "^4.9.5"
+  },
+  "peerDependencies": {
+    "react": ">= 18",
+    "styled-components": ">= 5"
   }
 }

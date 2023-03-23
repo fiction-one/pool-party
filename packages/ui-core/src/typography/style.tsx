@@ -1,7 +1,8 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled, { css, DefaultTheme } from "styled-components";
+import { pxToRem } from "@f1/ui-utils";
+import { TextVariant } from "@f1/ui-theme";
 import { TypographyProps } from "./types";
-import { pxToRem } from "@f1/ui-utils/src";
 
 const getLineHeight = (size: TypographyProps["lineHeight"]) => {
   if (size === "small") {
@@ -22,10 +23,39 @@ const getFontWeight = (weight: TypographyProps["fontWeight"]) => {
   }
 };
 
+const getLetterSpacing = (size: TypographyProps["letterSpacing"]) => {
+  if (size === "wide") {
+    return "0.2em";
+  }
+  return "initial";
+};
+
+const getThemeable = (theme: DefaultTheme, variant: TextVariant) => {
+  const textTheme = theme.text[variant];
+  return css`
+    color: ${textTheme.default["color"]};
+  `;
+};
+
 export const StyledTypography = styled.span<TypographyProps>`
-  ${({ lineHeight, fontSize, fontWeight }) => css`
+  ${({ lineHeight }) => css`
     line-height: ${getLineHeight(lineHeight)};
-    font-size: ${fontSize ? pxToRem(fontSize) : "inherit"};
-    font-weight: ${fontWeight ? getFontWeight(fontWeight) : "initial"};
   `}
+  ${({ fontSize }) =>
+    fontSize &&
+    css`
+      font-size: ${pxToRem(fontSize)};
+    `}
+  ${({ fontWeight }) =>
+    fontWeight &&
+    css`
+      font-weight: ${getFontWeight(fontWeight)};
+    `}
+  ${({ letterSpacing }) =>
+    letterSpacing &&
+    css`
+      letter-spacing: ${getLetterSpacing(letterSpacing)};
+    `}
+  
+  ${({ theme, variant }) => variant && getThemeable(theme, variant)}
 `;

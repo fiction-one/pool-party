@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonVariant } from "@f1/ui-theme/src/themes/types";
+import { ButtonVariant } from "@f1/ui-theme";
 
 type Size = "small" | "regular" | "large";
 

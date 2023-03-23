@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Typography } from "@f1/ui-core/src";
+import { Typography } from "@f1/ui-core";
 import { LayerOptions } from "./types";
 import { FloatingProvider, useTooltip } from "./floating-provider";
 import { ContentPortal, TooltipLayer, Trigger } from "./components";

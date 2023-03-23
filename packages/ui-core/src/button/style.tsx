@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css, DefaultTheme } from "styled-components";
-import { pxToRem } from "@f1/ui-utils/src";
-import { ButtonVariant } from "@f1/ui-theme/src/themes/types";
+import { pxToRem } from "@f1/ui-utils";
+import { ButtonVariant } from "@f1/ui-theme";
 import { ButtonProps } from "./types";
 
 const getHeight = (size: ButtonProps["size"]): string => {

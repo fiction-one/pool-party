@@ -1,1 +1,2 @@
-export * from "./typography";
+export * from "./component";
+export type { TypographyProps } from "./types";
