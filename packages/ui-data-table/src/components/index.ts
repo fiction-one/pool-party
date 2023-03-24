@@ -6,9 +6,22 @@ import {
   StyledTableBody as TableBody,
   StyledTableRow as TableRow,
   StyledTableCell as TableCell,
-} from "./style";
+} from "./table";
+
+import {
+  StyledFrame as Frame,
+  StyledTableFrame as TableFrame,
+  StyledFooterFrame as FooterFrame,
+  StyledFooterGroup as FooterGroup,
+} from "./layout";
 
 export {
+  // layout components
+  Frame,
+  TableFrame,
+  FooterFrame,
+  FooterGroup,
+  // table components
   Table,
   TableHeader,
   TableHeaderRow,

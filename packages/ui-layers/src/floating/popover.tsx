@@ -1,7 +1,7 @@
 import * as React from "react";
 import { LayerOptions } from "./types";
 import { FloatingProvider, useTooltip } from "./floating-provider";
-import { PopoverLayer, ContentPortal, Trigger } from "./components";
+import { PopoverSurface, ContentPortal, Trigger } from "./components";
 
 interface Props extends LayerOptions {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ export const Popover = ({ children, content, ...options }: Props) => {
     <FloatingProvider layerInterface={useTooltip(options)}>
       <Trigger>{children}</Trigger>
       <ContentPortal>
-        <PopoverLayer>{content}</PopoverLayer>
+        <PopoverSurface>{content}</PopoverSurface>
       </ContentPortal>
     </FloatingProvider>
   );

@@ -1,8 +1,8 @@
 import React from "react";
-import { LayerVariant } from "@f1/ui-theme";
+import { SurfaceVariant } from "@f1/ui-theme";
 
-export interface LayerProps {
-  variant: LayerVariant;
+export interface SurfaceProps {
+  variant: SurfaceVariant;
   as?:
     | "div"
     | "section"
