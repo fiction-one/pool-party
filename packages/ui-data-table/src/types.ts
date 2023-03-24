@@ -1,10 +1,20 @@
-import { Column } from "react-table";
+import {
+  TableOptions,
+  TableState,
+  UsePaginationOptions,
+  UsePaginationState,
+} from "react-table";
 
-export interface TableProps<T extends Record<string, unknown>> {
-  columns: Column<T>[];
-  data: T[];
-  fetchData?: (pageIndex: number, pageSize: number) => void;
+export interface TableProps<T extends Record<string, unknown>>
+  extends TableOptions<T> {
   loading?: boolean;
-  totalCount?: number;
-  pageCount?: number;
+  fetchData?: (pageIndex: number, pageSize: number) => void;
+  initialState?: Partial<TableState<T>>;
+  pagination?: {
+    props: UsePaginationOptions<T>;
+    initialState: UsePaginationState<T>;
+    extra: {
+      totalCount: number;
+    };
+  };
 }

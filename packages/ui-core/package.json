@@ -16,10 +16,10 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "dependencies": {
-    "@f1/ui-utils": "workspace:*",
-    "@f1/ui-theme": "workspace:*"
+    "@f1/ui-utils": "workspace:*"
   },
   "devDependencies": {
+    "@f1/ui-theme": "workspace:*",
     "@types/react": "^18.0.17",
     "@types/styled-components": "^5.1.26",
     "eslint": "^7.32.0",

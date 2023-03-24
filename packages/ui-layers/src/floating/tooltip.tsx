@@ -2,7 +2,7 @@ import * as React from "react";
 import { Typography } from "@f1/ui-core";
 import { LayerOptions } from "./types";
 import { FloatingProvider, useTooltip } from "./floating-provider";
-import { ContentPortal, TooltipLayer, Trigger } from "./components";
+import { ContentPortal, TooltipSurface, Trigger } from "./components";
 
 interface Props extends LayerOptions {
   children: React.ReactNode;
@@ -14,9 +14,9 @@ export const Tooltip = ({ children, content, ...options }: Props) => {
     <FloatingProvider layerInterface={useTooltip(options)}>
       <Trigger>{children}</Trigger>
       <ContentPortal>
-        <TooltipLayer>
+        <TooltipSurface>
           <Typography fontSize={12}>{content}</Typography>
-        </TooltipLayer>
+        </TooltipSurface>
       </ContentPortal>
     </FloatingProvider>
   );

@@ -17,11 +17,11 @@
   },
   "dependencies": {
     "@f1/ui-core": "workspace:*",
-    "@f1/ui-theme": "workspace:*",
     "@f1/ui-utils": "workspace:*",
     "@floating-ui/react": "^0.21.1"
   },
   "devDependencies": {
+    "@f1/ui-theme": "workspace:*",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/styled-components": "^5.1.26",

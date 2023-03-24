@@ -2,7 +2,7 @@ export type ButtonVariant = "primary" | "secondary" | "ghost";
 
 export type InputVariant = "primary";
 
-export type LayerVariant =
+export type SurfaceVariant =
   | "navigation"
   | "page"
   | "surface"
@@ -30,8 +30,8 @@ export interface Theme {
     "default" | "active",
     "color" | "background-color" | "border-color"
   >;
-  layer: ThemeItem<
-    LayerVariant,
+  surface: ThemeItem<
+    SurfaceVariant,
     "default",
     "background-color" | "border-color"
   >;

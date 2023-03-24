@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { FloatingPortal, useMergeRefs } from "@floating-ui/react";
-import { Layer } from "@f1/ui-core";
+import { Surface } from "@f1/ui-core";
 import { pxToRem } from "@f1/ui-utils";
 import { useLayer } from "./floating-provider";
 
@@ -54,13 +54,13 @@ export const ContentPortal = React.forwardRef<
   );
 });
 
-export const TooltipLayer = styled(Layer).attrs({ variant: "floating" })`
+export const TooltipSurface = styled(Surface).attrs({ variant: "floating" })`
   border-radius: ${pxToRem(4)};
   padding: ${pxToRem(4)} ${pxToRem(8)};
   color: ${({ theme }) => theme.text.primary.default.color};
 `;
 
-export const PopoverLayer = styled(Layer).attrs({ variant: "floating" })`
+export const PopoverSurface = styled(Surface).attrs({ variant: "floating" })`
   border-radius: ${pxToRem(4)};
   padding: ${pxToRem(4)} ${pxToRem(8)};
   color: ${({ theme }) => theme.text.primary.default.color};

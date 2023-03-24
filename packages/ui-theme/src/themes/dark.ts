@@ -107,7 +107,7 @@ export const darkTheme: Theme = {
       },
     },
   },
-  layer: {
+  surface: {
     navigation: {
       default: {
         "background-color": palette.dark900,

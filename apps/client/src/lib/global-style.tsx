@@ -16,8 +16,28 @@ export const GlobalStyle = createGlobalStyle`
     
     ${({ theme }) => {
       return css`
-        background-color: ${theme.layer.page.default["background-color"]};
+        background-color: ${theme.surface.page.default["background-color"]};
         color: ${theme.text.primary.default["color"]};
+
+        * {
+          ::-webkit-scrollbar {
+            width: 0.5rem;
+          }
+
+          ::-webkit-scrollbar-track {
+            background: ${theme.surface.page.default["background-color"]};
+            border-radius: 0.75rem;
+          }
+
+          ::-webkit-scrollbar-thumb {
+            background: ${theme.surface.surface.default["background-color"]};
+            border-radius: 0.75rem;
+          }
+
+          ::-webkit-scrollbar-thumb:hover {
+            background: ${theme.surface.highlight.default["background-color"]};
+          }
+        }
       `;
     }}
 `;

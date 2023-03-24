@@ -75,8 +75,8 @@ export const StyledButton = styled.button<ButtonProps>`
     font-size: ${getFontSize(size ?? DEFAULT_SIZE)};
 
     border-style: solid;
-    border-width: ${pxToRem(1)};
-    border-radius: 100vh;
+    border-width: 1px;
+    border-radius: ${pxToRem(8)};
 
     cursor: pointer;
 

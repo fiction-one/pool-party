@@ -17,11 +17,14 @@
   },
   "dependencies": {
     "@f1/ui-core": "workspace:*",
+    "@f1/ui-utils": "workspace:*",
     "react-table": "^7.8.0"
   },
   "devDependencies": {
+    "@f1/ui-theme": "workspace:*",
     "@types/react": "^18.0.17",
     "@types/react-table": "^7.7.14",
+    "@types/styled-components": "^5.1.26",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
