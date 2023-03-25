@@ -2,24 +2,46 @@
 
 import React from "react";
 import useSWR from "swr";
-import { Surface, InputControl, TextInput, Typography } from "@f1/ui-core";
-import { DataTable, TableProps } from "@f1/ui-data-table";
+import {
+  format,
+  formatDuration,
+  fromUnixTime,
+  intervalToDuration,
+  add,
+  isAfter,
+  differenceInDays,
+  differenceInHours,
+} from "date-fns";
+import {
+  Surface,
+  InputControl,
+  TextInput,
+  Typography,
+  ChipProps,
+} from "@f1/ui-core";
+import { DataTable, TableProps, ChipCellRenderer } from "@f1/ui-data-table";
 import { pxToRem } from "@f1/ui-utils";
 import { Frame, Section } from "./layout-components";
 
+interface RowData<T> {
+  value: T;
+}
+
 interface FormattedItem extends Record<string, unknown> {
-  name: string;
-  status: string;
-  owner: string;
-  expiresIn: string;
-  registeredDate: string;
+  name: RowData<string>;
+  status: RowData<"expired" | "renewable" | "active" | null> & {
+    variant: ChipProps["variant"];
+  };
+  owner: RowData<string>;
+  expiresIn: RowData<string | null>;
+  registeredDate: RowData<string>;
 }
 
 interface ResponseItem {
   fname: string;
   custodyAddr: string;
-  expirationTimestamp: string | null;
-  createdAtTimestamp: string;
+  expiryTs: string | null;
+  createdAtTs: string;
 }
 
 interface ResponseData {
@@ -29,35 +51,36 @@ interface ResponseData {
 const columns: TableProps<FormattedItem>["columns"] = [
   {
     Header: "NAME",
-    accessor: "name",
+    accessor: (d) => d.name.value,
     minWidth: 100,
     width: 150,
     maxWidth: 200,
   },
   {
     Header: "STATUS",
-    accessor: "status",
+    accessor: (d) => d.status,
     minWidth: 100,
     width: 150,
     maxWidth: 200,
+    Cell: ChipCellRenderer,
   },
   {
     Header: "OWNER",
-    accessor: "owner",
+    accessor: (d) => d.owner.value,
     minWidth: 100,
     width: 150,
     maxWidth: 200,
   },
   {
     Header: "EXPIRES IN",
-    accessor: "expiresIn",
+    accessor: (d) => d.expiresIn.value,
     minWidth: 100,
     width: 150,
     maxWidth: 200,
   },
   {
     Header: "REGISTERED DATE",
-    accessor: "registeredDate",
+    accessor: (d) => d.registeredDate.value,
     minWidth: 100,
     width: 150,
     maxWidth: 200,
@@ -72,20 +95,88 @@ const truncateEthAddress = (address: string) => {
   return `${match[1]}…${match[2]}`;
 };
 
+const GRACE_PERIOD_DAYS = 30;
+
+const getNowDate = () => new Date();
+
+// name becomes available 30 days after expiry date
+// name is renewable anytime between expiry date and 30 days after it
+const getStatus = (expiryDate: Date, gracePeriodDays = GRACE_PERIOD_DAYS) => {
+  const renewByDate = add(expiryDate, {
+    days: gracePeriodDays,
+  });
+  const nowDate = getNowDate();
+
+  if (isAfter(nowDate, renewByDate)) return "expired";
+  if (isAfter(nowDate, expiryDate)) return "renewable";
+  return "active";
+};
+
+const getChipVariantFromStatus = (status: FormattedItem["status"]["value"]) => {
+  if (status === "expired") return "error";
+  if (status === "renewable") return "warning";
+  if (status === "active") return "success";
+};
+
+// expires in factors in the renewal period
+const getExpiresIn = (
+  expiryDate: Date,
+  gracePeriodDays = GRACE_PERIOD_DAYS
+) => {
+  const renewByDate = add(expiryDate, {
+    days: gracePeriodDays,
+  });
+  const nowDate = getNowDate();
+  if (isAfter(nowDate, renewByDate)) return null;
+
+  const duration = intervalToDuration({
+    start: renewByDate,
+    end: nowDate,
+  });
+  const days = differenceInDays(renewByDate, nowDate);
+  const hours = differenceInHours(renewByDate, nowDate);
+
+  return formatDuration(
+    {
+      days,
+      hours: duration.days ? 0 : hours,
+      minutes: duration.days ? 0 : duration.minutes,
+    },
+    {
+      format: ["days", "hours", "minutes"],
+    }
+  );
+};
+
+const getRegisteredDate = (createdDate: Date) =>
+  format(createdDate, "MM/dd/yyyy");
+
 const useMapData = (data?: ResponseItem[]) =>
   React.useMemo(
     () =>
-      (data ?? []).map(
-        (d): FormattedItem => ({
-          name: d.fname,
-          status: "status",
-          owner: truncateEthAddress(d.custodyAddr),
-          expiresIn: "TBD",
-          registeredDate: new Date(
-            +d.createdAtTimestamp * 1000
-          ).toLocaleDateString(),
-        })
-      ),
+      (data ?? []).map((d): FormattedItem => {
+        const expiryDate = d.expiryTs ? fromUnixTime(+d.expiryTs) : null;
+        const createdDate = fromUnixTime(+d.createdAtTs);
+        const status = expiryDate && getStatus(expiryDate);
+        return {
+          name: {
+            value: d.fname,
+          },
+          status: {
+            value: status,
+            variant: getChipVariantFromStatus(status),
+          },
+          owner: {
+            value: truncateEthAddress(d.custodyAddr),
+          },
+          expiresIn: {
+            value: expiryDate && getExpiresIn(expiryDate),
+          },
+          registeredDate: {
+            value: getRegisteredDate(createdDate),
+          },
+        };
+      }),
     [data]
   );
 
@@ -94,17 +185,40 @@ const PAGE_SIZE = 10;
 export default function ClientComponent() {
   const [search, setSearch] = React.useState("");
   const [pageIndex, setPageIndex] = React.useState(0);
+  const [order, setOrder] = React.useState<{
+    by: "createdAtTs" | "expiryTs";
+    direction: "asc" | "desc";
+  }>({
+    by: "expiryTs",
+    direction: "asc",
+  });
 
   const { data, error, isLoading } = useSWR<ResponseData>(
     `
     {
-      fnames(first: ${PAGE_SIZE}, skip: ${
-      PAGE_SIZE * pageIndex
-    }, orderBy: createdAtTimestamp, orderDirection: desc) {
+      fnames(first: ${PAGE_SIZE}, skip: ${PAGE_SIZE * pageIndex}, orderBy: ${
+      order.by
+    }, orderDirection: ${order.direction}) {
         fname
         custodyAddr
-        expirationTimestamp
-        createdAtTimestamp
+        expiryTs
+        createdAtTs
+      }
+    }
+  `
+  );
+
+  // prefetch
+  useSWR<ResponseData>(
+    `
+    {
+      fnames(first: ${PAGE_SIZE}, skip: ${
+      PAGE_SIZE * (pageIndex + 1)
+    }, orderBy: ${order.by}, orderDirection: ${order.direction}) {
+        fname
+        custodyAddr
+        expiryTs
+        createdAtTs
       }
     }
   `
@@ -168,7 +282,7 @@ export default function ClientComponent() {
             pagination={{
               props: {
                 manualPagination: true,
-                pageCount: 10,
+                pageCount: 1000,
               },
               initialState: {
                 pageSize: 20,

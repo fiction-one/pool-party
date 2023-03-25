@@ -14,6 +14,7 @@
     "@f1/ui-layers": "workspace:*",
     "@f1/ui-theme": "workspace:*",
     "@f1/ui-utils": "workspace:*",
+    "date-fns": "^2.29.3",
     "graphql-request": "^5.2.0",
     "next": "^13.2.3",
     "react": "18.2.0",

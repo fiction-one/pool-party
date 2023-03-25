@@ -42,7 +42,7 @@ export const StyledTableHeaderCell = styled.th`
   padding: ${pxToRem(16)} ${pxToRem(24)};
   color: ${({ theme }) => theme.text.secondary.default.color};
   text-align: left;
-  vertical-align: inherit;
+  vertical-align: middle;
   position: relative;
   white-space: nowrap;
 `;
@@ -77,4 +77,5 @@ export const StyledTableCell = styled.td`
   color: ${({ theme }) => theme.text.primary.default.color};
   text-align: left;
   position: relative;
+  vertical-align: middle;
 `;

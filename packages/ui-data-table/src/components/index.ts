@@ -15,6 +15,8 @@ import {
   StyledFooterGroup as FooterGroup,
 } from "./layout";
 
+import { ChipCellRenderer } from "./cell";
+
 export {
   // layout components
   Frame,
@@ -29,4 +31,6 @@ export {
   TableBody,
   TableRow,
   TableCell,
+  // cell renderers
+  ChipCellRenderer,
 };

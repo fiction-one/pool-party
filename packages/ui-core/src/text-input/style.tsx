@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { css, DefaultTheme } from "styled-components";
 import { pxToRem } from "@f1/ui-utils";
-import { InputVariant } from "@f1/ui-theme";
 import { TextInputProps } from "./types";
 
 export const StyledTextInput = styled.input<TextInputProps>`
@@ -22,9 +21,12 @@ export const StyledTextInput = styled.input<TextInputProps>`
   }
 `;
 
-const DEFAULT_VARIANT: InputVariant = "primary";
+const DEFAULT_VARIANT: keyof DefaultTheme["input"] = "primary";
 
-const getThemeable = (theme: DefaultTheme, variant: InputVariant) => {
+const getThemeable = (
+  theme: DefaultTheme,
+  variant: keyof DefaultTheme["input"]
+) => {
   const inputTheme = theme.input[variant];
   return css`
     background-color: ${inputTheme.default["background-color"]};
