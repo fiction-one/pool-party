@@ -1,8 +1,8 @@
 import React from "react";
-import { SurfaceVariant } from "@f1/ui-theme";
+import { Theme } from "@f1/ui-theme";
 
 export interface SurfaceProps {
-  variant: SurfaceVariant;
+  variant?: keyof Theme["surface"];
   as?:
     | "div"
     | "section"

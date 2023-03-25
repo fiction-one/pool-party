@@ -1,8 +1,8 @@
 import React from "react";
-import { InputVariant } from "@f1/ui-theme";
+import { Theme } from "@f1/ui-theme";
 
 export interface TextInputProps {
-  variant?: InputVariant;
+  variant?: keyof Theme["input"];
   disabled?: boolean;
   placeholder?: string;
   autoFocus?: boolean;

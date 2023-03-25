@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { css, DefaultTheme } from "styled-components";
 import { pxToRem } from "@f1/ui-utils";
-import { TextVariant } from "@f1/ui-theme";
 import { TypographyProps } from "./types";
 
 const getLineHeight = (size: TypographyProps["lineHeight"]) => {
@@ -30,7 +29,10 @@ const getLetterSpacing = (size: TypographyProps["letterSpacing"]) => {
   return "initial";
 };
 
-const getThemeable = (theme: DefaultTheme, variant: TextVariant) => {
+const getThemeable = (
+  theme: DefaultTheme,
+  variant: keyof DefaultTheme["text"]
+) => {
   const textTheme = theme.text[variant];
   return css`
     color: ${textTheme.default["color"]};

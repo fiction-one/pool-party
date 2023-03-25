@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { css, DefaultTheme } from "styled-components";
 import { pxToRem } from "@f1/ui-utils";
-import { ButtonVariant } from "@f1/ui-theme";
 import { ButtonProps } from "./types";
 
 const getHeight = (size: ButtonProps["size"]): string => {
@@ -34,7 +33,10 @@ const getFontSize = (size: ButtonProps["size"]): string => {
   }
 };
 
-const getThemeable = (theme: DefaultTheme, variant: ButtonVariant) => {
+const getThemeable = (
+  theme: DefaultTheme,
+  variant: keyof DefaultTheme["button"]
+) => {
   const buttonTheme = theme.button[variant];
   return css`
     background-color: ${buttonTheme.default["background-color"]};
@@ -61,7 +63,7 @@ const getThemeable = (theme: DefaultTheme, variant: ButtonVariant) => {
   `;
 };
 
-const DEFAULT_VARIANT: ButtonVariant = "primary";
+const DEFAULT_VARIANT: ButtonProps["variant"] = "primary";
 
 const DEFAULT_SIZE: ButtonProps["size"] = "regular";
 

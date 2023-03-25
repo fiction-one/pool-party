@@ -22,6 +22,12 @@ const palette = {
   neutral700: "#334155",
   neutral800: "#1E293B",
   neutral900: "#0F172A",
+  green300: "#6EE7B7",
+  green800: "#065F46",
+  yellow400: "#FBBF24",
+  yellow800: "#92400E",
+  red400: "#F87171",
+  red800: "#991B1B",
 };
 
 export const darkTheme: Theme = {
@@ -90,6 +96,36 @@ export const darkTheme: Theme = {
         "background-color": "transparent",
         color: palette.neutral400,
         "border-color": palette.neutral400,
+      },
+    },
+  },
+  chip: {
+    info: {
+      default: {
+        "background-color": palette.dark700,
+        color: palette.neutral400,
+        "border-color": palette.dark700,
+      },
+    },
+    success: {
+      default: {
+        "background-color": palette.green300,
+        color: palette.green800,
+        "border-color": palette.green300,
+      },
+    },
+    warning: {
+      default: {
+        "background-color": palette.yellow400,
+        color: palette.yellow400,
+        "border-color": palette.yellow400,
+      },
+    },
+    error: {
+      default: {
+        "background-color": palette.red400,
+        color: palette.red800,
+        "border-color": palette.red400,
       },
     },
   },
