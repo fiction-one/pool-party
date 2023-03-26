@@ -4,8 +4,8 @@ import ClientProviders from "../lib/client-providers";
 import { GlobalStyle } from "../lib/global-style";
 
 export const metadata = {
-  title: "🌎",
-  description: "",
+  title: "👀",
+  description: "POOL PARTY",
 };
 
 export default function RootLayout({
