@@ -19,6 +19,7 @@ import {
 import { DataTable, TableProps, ChipCellRenderer } from "@f1/ui-data-table";
 import { pxToRem } from "@f1/ui-utils";
 import { Frame, Section } from "./layout-components";
+import { RiGithubLine } from "react-icons/ri";
 
 interface RowData<T> {
   value: T;
@@ -194,6 +195,8 @@ const useMapData = (data?: ResponseItem[]) =>
 
 const PAGE_SIZE = 10;
 
+const GITHUB_URL = "https://github.com/fiction-one/pool-party";
+
 export default function ClientComponent() {
   // in production, we should be debouncing search
   const [search, setSearch] = React.useState("");
@@ -365,6 +368,30 @@ export default function ClientComponent() {
                   }
             }
           />
+        </Section>
+        <Section
+          style={{
+            marginTop: 0,
+            marginBottom: pxToRem(32),
+            padding: `0 ${pxToRem(32)}`,
+          }}
+        >
+          <Typography as="span" variant="secondary">
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: "inherit",
+                textDecoration: "none",
+                display: "inline-flex",
+                alignItems: "center",
+              }}
+            >
+              MIT&nbsp;
+              <RiGithubLine />
+            </a>
+          </Typography>
         </Section>
       </Frame>
     </Surface>

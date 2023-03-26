@@ -31,6 +31,7 @@ importers:
       next: ^13.2.3
       react: 18.2.0
       react-dom: 18.2.0
+      react-icons: ^4.8.0
       styled-components: ^5.3.9
       swr: ^2.1.1
       tsconfig: workspace:*
@@ -46,6 +47,7 @@ importers:
       next: 13.2.3_6m24vuloj5ihw4zc5lbsktc4fu
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      react-icons: 4.8.0_react@18.2.0
       styled-components: 5.3.9_zqyshjqmmmqwn6ax6dftxsbcrq
       swr: 2.1.1_react@18.2.0
     devDependencies:
@@ -7297,6 +7299,14 @@ packages:
       react-dom: 18.2.0_react@18.2.0
       react-is: 18.1.0
     dev: true
+
+  /react-icons/4.8.0_react@18.2.0:
+    resolution: {integrity: sha512-N6+kOLcihDiAnj5Czu637waJqSnwlMNROzVZMhfX68V/9bu9qHaMIJC4UdozWoOk57gahFCNHwVvWzm0MTzRjg==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /react-inspector/6.0.1_react@18.2.0:
     resolution: {integrity: sha512-cxKSeFTf7jpSSVddm66sKdolG90qURAX3g1roTeaN6x0YEbtWc8JpmFN9+yIqLNH2uEkYerWLtJZIXRIFuBKrg==}
