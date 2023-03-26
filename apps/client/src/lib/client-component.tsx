@@ -4,13 +4,10 @@ import React from "react";
 import useSWR from "swr";
 import {
   format,
-  formatDuration,
   fromUnixTime,
-  intervalToDuration,
   add,
   isAfter,
-  differenceInDays,
-  differenceInHours,
+  formatDistanceToNowStrict,
 } from "date-fns";
 import {
   Surface,
@@ -44,8 +41,18 @@ interface ResponseItem {
   createdAtTs: string;
 }
 
-interface ResponseData {
+interface AllResponse {
   fnames: ResponseItem[];
+}
+
+interface CountResponse {
+  fname_total: {
+    count: number;
+  };
+}
+
+interface SearchResponse {
+  fnameSearch: ResponseItem[];
 }
 
 const columns: TableProps<FormattedItem>["columns"] = [
@@ -63,6 +70,7 @@ const columns: TableProps<FormattedItem>["columns"] = [
     width: 150,
     maxWidth: 200,
     Cell: ChipCellRenderer,
+    disableSortBy: true,
   },
   {
     Header: "OWNER",
@@ -127,25 +135,29 @@ const getExpiresIn = (
     days: gracePeriodDays,
   });
   const nowDate = getNowDate();
-  if (isAfter(nowDate, renewByDate)) return null;
+  const timeDiffInMs = renewByDate.getTime() - nowDate.getTime();
 
-  const duration = intervalToDuration({
-    start: renewByDate,
-    end: nowDate,
-  });
-  const days = differenceInDays(renewByDate, nowDate);
-  const hours = differenceInHours(renewByDate, nowDate);
+  if (timeDiffInMs < 0) {
+    return null;
+  }
 
-  return formatDuration(
-    {
-      days,
-      hours: duration.days ? 0 : hours,
-      minutes: duration.days ? 0 : duration.minutes,
-    },
-    {
-      format: ["days", "hours", "minutes"],
-    }
-  );
+  if (timeDiffInMs >= 24 * 60 * 60 * 1000) {
+    // Show days only if more than 1 day until expiry
+    return formatDistanceToNowStrict(renewByDate, {
+      addSuffix: false,
+      unit: "day",
+    });
+  } else if (timeDiffInMs >= 60 * 60 * 1000) {
+    return formatDistanceToNowStrict(renewByDate, {
+      addSuffix: false,
+      unit: "hour",
+    });
+  } else {
+    return formatDistanceToNowStrict(renewByDate, {
+      addSuffix: false,
+      unit: "minute",
+    });
+  }
 };
 
 const getRegisteredDate = (createdDate: Date) =>
@@ -183,17 +195,19 @@ const useMapData = (data?: ResponseItem[]) =>
 const PAGE_SIZE = 10;
 
 export default function ClientComponent() {
+  // in production, we should be debouncing search
   const [search, setSearch] = React.useState("");
   const [pageIndex, setPageIndex] = React.useState(0);
   const [order, setOrder] = React.useState<{
     by: "createdAtTs" | "expiryTs";
     direction: "asc" | "desc";
   }>({
-    by: "expiryTs",
-    direction: "asc",
+    by: "createdAtTs",
+    direction: "desc",
   });
 
-  const { data, error, isLoading } = useSWR<ResponseData>(
+  // all data search, only run when no full text search
+  const { data: allData } = useSWR<AllResponse>(
     `
     {
       fnames(first: ${PAGE_SIZE}, skip: ${PAGE_SIZE * pageIndex}, orderBy: ${
@@ -205,11 +219,14 @@ export default function ClientComponent() {
         createdAtTs
       }
     }
-  `
+  `,
+    {
+      isPaused: () => !!search,
+    }
   );
 
-  // prefetch
-  useSWR<ResponseData>(
+  // prefetch next page for all data search, only run when no full text search
+  useSWR(
     `
     {
       fnames(first: ${PAGE_SIZE}, skip: ${
@@ -221,14 +238,50 @@ export default function ClientComponent() {
         createdAtTs
       }
     }
+  `,
+    {
+      isPaused: () => !!search,
+    }
+  );
+
+  // only for pagination
+  const { data: countData } = useSWR<CountResponse>(
+    `
+    {
+      fname_total: count(id: "fname_count") {
+        count
+      }
+    }
   `
   );
 
-  const mappedData = useMapData(data?.fnames);
+  // full text search. this is not a fuzzy search (yet) and will not paginate
+  const { data: searchData } = useSWR<SearchResponse>(
+    `
+    {
+      fnameSearch(text: "${search}") {
+        fname
+        custodyAddr
+        expiryTs
+        createdAtTs
+      }
+    }
+  `,
+    {
+      isPaused: () => !search,
+    }
+  );
+
+  const mappedData = useMapData(
+    search ? searchData?.fnameSearch : allData?.fnames
+  );
+
+  const count = search ? mappedData.length : countData?.fname_total.count ?? 0;
+  const pageCount = count ? Math.ceil(count / PAGE_SIZE) : 1;
 
   const fetchData: TableProps<Record<string, unknown>>["fetchData"] = (
-    pageIndex,
-    pageSize
+    pageIndex
+    // pageSize
   ) => {
     setPageIndex(pageIndex);
   };
@@ -256,7 +309,7 @@ export default function ClientComponent() {
           }}
         >
           <Typography as="h3" fontWeight="semi" letterSpacing="wide">
-            CASTIFY | beta
+            POOL PARTY | beta
           </Typography>
         </Section>
         <Section>
@@ -277,21 +330,40 @@ export default function ClientComponent() {
           <DataTable
             columns={columns}
             data={mappedData}
-            loading={isLoading}
             fetchData={fetchData}
-            pagination={{
+            sorting={{
               props: {
-                manualPagination: true,
-                pageCount: 1000,
+                manualSortBy: true,
+                autoResetSortBy: false,
+                disableSortRemove: true,
               },
               initialState: {
-                pageSize: 20,
-                pageIndex: 0,
-              },
-              extra: {
-                totalCount: 200,
+                sortBy: [
+                  {
+                    id: order.by,
+                    desc: order.direction === "desc",
+                  },
+                ],
               },
             }}
+            pagination={
+              search // since search is only full text, we do not need to paginate here
+                ? undefined
+                : {
+                    props: {
+                      autoResetPage: false,
+                      manualPagination: true,
+                      pageCount,
+                    },
+                    initialState: {
+                      pageSize: PAGE_SIZE,
+                      pageIndex,
+                    },
+                    extra: {
+                      totalCount: count,
+                    },
+                  }
+            }
           />
         </Section>
       </Frame>

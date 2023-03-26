@@ -9,5 +9,5 @@ export const Frame = styled.div`
 `;
 
 export const Section = styled.div`
-  margin: ${pxToRem(18)} ${pxToRem(16)};
+  margin: ${pxToRem(12)} ${pxToRem(16)};
 `;

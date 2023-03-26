@@ -3,14 +3,14 @@ import {
   useTable,
   useFlexLayout,
   usePagination,
+  useSortBy,
   PluginHook,
-  TableInstance,
-  UsePaginationOptions,
+  UseSortByState,
   UsePaginationInstanceProps,
-  Row,
   UseTableInstanceProps,
   TableState,
   UsePaginationState,
+  UseSortByInstanceProps,
 } from "react-table";
 import {
   Frame,
@@ -30,11 +30,13 @@ import { Button, Typography } from "@f1/ui-core";
 
 interface CombinedState<T extends Record<string, unknown>>
   extends TableState<T>,
-    Partial<UsePaginationState<T>> {}
+    Partial<UsePaginationState<T>>,
+    Partial<UseSortByState<T>> {}
 
 interface CombinedInstance<T extends Record<string, unknown>>
   extends UseTableInstanceProps<T>,
-    Partial<UsePaginationInstanceProps<T>> {
+    Partial<UsePaginationInstanceProps<T>>,
+    Partial<Omit<UseSortByInstanceProps<T>, "rows">> {
   state: CombinedState<T>;
 }
 
@@ -79,20 +81,28 @@ export const DataTable = <T extends Record<string, unknown>>({
   // for pagination
   fetchData,
   loading,
+  // sorting props
+  sorting,
   // pagination props
   pagination,
   // table options
   initialState,
   ...tableOptions
 }: TableProps<T>) => {
-  const pluginHooks: PluginHook<T>[] = [useFlexLayout, usePagination];
+  const pluginHooks: PluginHook<T>[] = [
+    useFlexLayout,
+    useSortBy,
+    usePagination,
+  ];
 
   const instance: CombinedInstance<T> = useTable<T>(
     {
       ...tableOptions,
+      ...sorting?.props,
       ...pagination?.props,
       initialState: {
         ...initialState,
+        ...sorting?.initialState,
         ...pagination?.initialState,
       },
     },
@@ -114,6 +124,8 @@ export const DataTable = <T extends Record<string, unknown>>({
   const pageSize = state.pageSize;
   const fetchingPageIndex = React.useRef(currentPageIndex);
   const paginationEnabled = fetchData && pagination;
+
+  const currentSort = state.sortBy?.[0];
 
   React.useEffect(() => {
     if (paginationEnabled && fetchingPageIndex.current !== currentPageIndex) {
