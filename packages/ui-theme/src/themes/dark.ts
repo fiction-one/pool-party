@@ -117,7 +117,7 @@ export const darkTheme: Theme = {
     warning: {
       default: {
         "background-color": palette.yellow400,
-        color: palette.yellow400,
+        color: palette.yellow800,
         "border-color": palette.yellow400,
       },
     },

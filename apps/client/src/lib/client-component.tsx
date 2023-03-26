@@ -4,13 +4,10 @@ import React from "react";
 import useSWR from "swr";
 import {
   format,
-  formatDuration,
   fromUnixTime,
-  intervalToDuration,
   add,
   isAfter,
-  differenceInDays,
-  differenceInHours,
+  formatDistanceToNowStrict,
 } from "date-fns";
 import {
   Surface,
@@ -19,12 +16,7 @@ import {
   Typography,
   ChipProps,
 } from "@f1/ui-core";
-import {
-  DataTable,
-  TableProps,
-  ChipCellRenderer,
-  SortHeaderRenderer,
-} from "@f1/ui-data-table";
+import { DataTable, TableProps, ChipCellRenderer } from "@f1/ui-data-table";
 import { pxToRem } from "@f1/ui-utils";
 import { Frame, Section } from "./layout-components";
 
@@ -143,25 +135,29 @@ const getExpiresIn = (
     days: gracePeriodDays,
   });
   const nowDate = getNowDate();
-  if (isAfter(nowDate, renewByDate)) return null;
+  const timeDiffInMs = renewByDate.getTime() - nowDate.getTime();
 
-  const duration = intervalToDuration({
-    start: renewByDate,
-    end: nowDate,
-  });
-  const days = differenceInDays(renewByDate, nowDate);
-  const hours = differenceInHours(renewByDate, nowDate);
+  if (timeDiffInMs < 0) {
+    return null;
+  }
 
-  return formatDuration(
-    {
-      days,
-      hours: duration.days ? 0 : hours,
-      minutes: duration.days ? 0 : duration.minutes,
-    },
-    {
-      format: ["days", "hours", "minutes"],
-    }
-  );
+  if (timeDiffInMs >= 24 * 60 * 60 * 1000) {
+    // Show days only if more than 1 day until expiry
+    return formatDistanceToNowStrict(renewByDate, {
+      addSuffix: false,
+      unit: "day",
+    });
+  } else if (timeDiffInMs >= 60 * 60 * 1000) {
+    return formatDistanceToNowStrict(renewByDate, {
+      addSuffix: false,
+      unit: "hour",
+    });
+  } else {
+    return formatDistanceToNowStrict(renewByDate, {
+      addSuffix: false,
+      unit: "minute",
+    });
+  }
 };
 
 const getRegisteredDate = (createdDate: Date) =>
