@@ -19,7 +19,12 @@ import {
   Typography,
   ChipProps,
 } from "@f1/ui-core";
-import { DataTable, TableProps, ChipCellRenderer } from "@f1/ui-data-table";
+import {
+  DataTable,
+  TableProps,
+  ChipCellRenderer,
+  SortHeaderRenderer,
+} from "@f1/ui-data-table";
 import { pxToRem } from "@f1/ui-utils";
 import { Frame, Section } from "./layout-components";
 
@@ -44,8 +49,18 @@ interface ResponseItem {
   createdAtTs: string;
 }
 
-interface ResponseData {
+interface AllResponse {
   fnames: ResponseItem[];
+}
+
+interface CountResponse {
+  fname_total: {
+    count: number;
+  };
+}
+
+interface SearchResponse {
+  fnameSearch: ResponseItem[];
 }
 
 const columns: TableProps<FormattedItem>["columns"] = [
@@ -63,6 +78,7 @@ const columns: TableProps<FormattedItem>["columns"] = [
     width: 150,
     maxWidth: 200,
     Cell: ChipCellRenderer,
+    disableSortBy: true,
   },
   {
     Header: "OWNER",
@@ -183,17 +199,19 @@ const useMapData = (data?: ResponseItem[]) =>
 const PAGE_SIZE = 10;
 
 export default function ClientComponent() {
+  // in production, we should be debouncing search
   const [search, setSearch] = React.useState("");
   const [pageIndex, setPageIndex] = React.useState(0);
   const [order, setOrder] = React.useState<{
     by: "createdAtTs" | "expiryTs";
     direction: "asc" | "desc";
   }>({
-    by: "expiryTs",
-    direction: "asc",
+    by: "createdAtTs",
+    direction: "desc",
   });
 
-  const { data, error, isLoading } = useSWR<ResponseData>(
+  // all data search, only run when no full text search
+  const { data: allData } = useSWR<AllResponse>(
     `
     {
       fnames(first: ${PAGE_SIZE}, skip: ${PAGE_SIZE * pageIndex}, orderBy: ${
@@ -205,11 +223,14 @@ export default function ClientComponent() {
         createdAtTs
       }
     }
-  `
+  `,
+    {
+      isPaused: () => !!search,
+    }
   );
 
-  // prefetch
-  useSWR<ResponseData>(
+  // prefetch next page for all data search, only run when no full text search
+  useSWR(
     `
     {
       fnames(first: ${PAGE_SIZE}, skip: ${
@@ -221,14 +242,50 @@ export default function ClientComponent() {
         createdAtTs
       }
     }
+  `,
+    {
+      isPaused: () => !!search,
+    }
+  );
+
+  // only for pagination
+  const { data: countData } = useSWR<CountResponse>(
+    `
+    {
+      fname_total: count(id: "fname_count") {
+        count
+      }
+    }
   `
   );
 
-  const mappedData = useMapData(data?.fnames);
+  // full text search. this is not a fuzzy search (yet) and will not paginate
+  const { data: searchData } = useSWR<SearchResponse>(
+    `
+    {
+      fnameSearch(text: "${search}") {
+        fname
+        custodyAddr
+        expiryTs
+        createdAtTs
+      }
+    }
+  `,
+    {
+      isPaused: () => !search,
+    }
+  );
+
+  const mappedData = useMapData(
+    search ? searchData?.fnameSearch : allData?.fnames
+  );
+
+  const count = search ? mappedData.length : countData?.fname_total.count ?? 0;
+  const pageCount = count ? Math.ceil(count / PAGE_SIZE) : 1;
 
   const fetchData: TableProps<Record<string, unknown>>["fetchData"] = (
-    pageIndex,
-    pageSize
+    pageIndex
+    // pageSize
   ) => {
     setPageIndex(pageIndex);
   };
@@ -256,7 +313,7 @@ export default function ClientComponent() {
           }}
         >
           <Typography as="h3" fontWeight="semi" letterSpacing="wide">
-            CASTIFY | beta
+            POOL PARTY | beta
           </Typography>
         </Section>
         <Section>
@@ -277,21 +334,40 @@ export default function ClientComponent() {
           <DataTable
             columns={columns}
             data={mappedData}
-            loading={isLoading}
             fetchData={fetchData}
-            pagination={{
+            sorting={{
               props: {
-                manualPagination: true,
-                pageCount: 1000,
+                manualSortBy: true,
+                autoResetSortBy: false,
+                disableSortRemove: true,
               },
               initialState: {
-                pageSize: 20,
-                pageIndex: 0,
-              },
-              extra: {
-                totalCount: 200,
+                sortBy: [
+                  {
+                    id: order.by,
+                    desc: order.direction === "desc",
+                  },
+                ],
               },
             }}
+            pagination={
+              search // since search is only full text, we do not need to paginate here
+                ? undefined
+                : {
+                    props: {
+                      autoResetPage: false,
+                      manualPagination: true,
+                      pageCount,
+                    },
+                    initialState: {
+                      pageSize: PAGE_SIZE,
+                      pageIndex,
+                    },
+                    extra: {
+                      totalCount: count,
+                    },
+                  }
+            }
           />
         </Section>
       </Frame>
